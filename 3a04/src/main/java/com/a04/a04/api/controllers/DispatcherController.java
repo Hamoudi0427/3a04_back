@@ -1,7 +1,9 @@
 package com.a04.a04.api.controllers;
 
 import com.a04.a04.api.models.Account;
+import com.a04.a04.api.models.Offer;
 import com.a04.a04.service.AccountDB;
+import com.a04.a04.service.OfferDB;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+
 
 @RestController()
-public class EncryptionController {
+public class DispatcherController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<String> login(@RequestParam("email") String email, @RequestParam("password") String password) {
         Account account = new Account(email, password);
@@ -50,10 +54,23 @@ public class EncryptionController {
     public ResponseEntity<String> deleteAccount(@RequestParam("email") String email) {
         AccountDB accountDB = new AccountDB();
         boolean success = accountDB.deleteAccount(email);
+        accountDB.close();
         if (success) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Deleted account.");
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Deletion failed.");
+        }
+    }
+
+    @RequestMapping(value = "/offer", method = RequestMethod.GET)
+    public ResponseEntity<ArrayList<Offer>> getOffers() {
+        OfferDB offerDB = new OfferDB();
+        ArrayList<Offer> offers = offerDB.getAllOffers();
+        offerDB.close();
+        if (offers != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(offers);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
 
