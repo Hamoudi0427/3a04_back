@@ -44,15 +44,11 @@ public class OfferDB {
     public boolean createOffer(Offer newOffer) {
         try {
             Statement statement = connection.createStatement();
-            String query = "SELECT * FROM offers";
-            ResultSet rs = statement.executeQuery(query);
-            ArrayList<Offer> offers = new ArrayList<Offer>();
-            while (rs.next()) {
-                Offer temp = new Offer(rs.getInt("Offer_ID"), rs.getInt("Offering_taxi"), rs.getInt("Open_seats"),
-                        rs.getString("Offerer"), rs.getFloat("Offerer_rating"), rs.getString("Offer_time"),
-                        rs.getString("Offer_destination"), rs.getString("Start_location"));
-                offers.add(temp);
-            }
+            String query = "INSERT INTO offers "
+                    +	"(Offer_ID, Offering_taxi, Open_seats, Offerer, Offerer_rating, Offer_time, Offer_destination, Start_location) "
+                    +	"values ('" + newOffer.offerID+ "','" + newOffer.offeringTaxi + "','" + newOffer.openSeats + "','" + newOffer.offerer + "','" + newOffer.offererRating + "','" +
+                    newOffer.offerTime + "','" + newOffer.offerDestination + "','" + newOffer.startLocation + "');";
+            statement.executeUpdate(query);
             return true;
         } catch (Exception e) {
             System.out.println(e);

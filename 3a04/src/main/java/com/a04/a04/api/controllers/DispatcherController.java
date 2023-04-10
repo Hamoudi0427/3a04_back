@@ -81,8 +81,7 @@ public class DispatcherController {
         OfferDB offerDB = new OfferDB();
         int offerId = offerDB.getMaxOfferId() + 1;
         Offer newOffer = new Offer(offerId, offeringTaxi, openSeats, offerer, offererRating, offerTime, offerDestination, startLocation);
-        //boolean success = offerDB.createOffer(newOffer);
-        boolean success = true;
+        boolean success = offerDB.createOffer(newOffer);
         offerDB.close();
         if (success) {
             return ResponseEntity.status(HttpStatus.CREATED).body(newOffer);
