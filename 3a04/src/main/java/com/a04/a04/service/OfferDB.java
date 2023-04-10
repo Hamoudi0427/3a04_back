@@ -69,6 +69,18 @@ public class OfferDB {
         }
     }
 
+    public boolean deleteOffer(int offerId) {
+        try {
+            Statement statement = connection.createStatement();
+            String query = "DELETE FROM offers WHERE Offer_ID = '" + offerId + "';";
+            statement.executeUpdate(query);
+            return true;
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+    }
+
     public void close() {
         try {
             connection.close();

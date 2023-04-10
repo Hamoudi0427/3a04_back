@@ -90,6 +90,18 @@ public class DispatcherController {
         }
     }
 
+    @RequestMapping(value = "/offer", method = RequestMethod.DELETE)
+    public ResponseEntity<String> deleteOffer(@RequestParam("offerId") int offerId) {
+        OfferDB offerDB = new OfferDB();
+        boolean success = offerDB.deleteOffer(offerId);
+        offerDB.close();
+        if (success) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Successfully deleted.");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error");
+        }
+    }
+
     @RequestMapping(value = "/error", method = RequestMethod.GET)
     public String error() {
         return "error page";
