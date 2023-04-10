@@ -79,5 +79,3 @@ public class DispatcherController {
         return "error page";
     }
 }
-
-// change schema to only have email, first, last, age, password, primary key is email

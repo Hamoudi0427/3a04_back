@@ -31,7 +31,7 @@ public class OfferDB {
             while (rs.next()) {
                 Offer temp = new Offer(rs.getInt("Offer_ID"), rs.getInt("Offering_taxi"), rs.getInt("Open_seats"),
                         rs.getString("Offerer"), rs.getFloat("Offerer_rating"), rs.getString("Offer_time"),
-                        rs.getString("Offer_destination"));
+                        rs.getString("Offer_destination"), rs.getString("Start_location"));
                 offers.add(temp);
             }
             return offers;
