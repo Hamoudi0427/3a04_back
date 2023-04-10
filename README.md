@@ -18,3 +18,9 @@ Success response: 201 status and "Success." in response body.
 Failure Resposne: 400 status and message based on failure reason.
 
 Note: |item| is what to replace in URL.
+
+# Get All Carpool offers
+GET https://3a04back-production.up.railway.app/offer
+
+Success response: 200 status and JSON containing offer object in response body.
+Failure Resposne: 400 status and empty response.
