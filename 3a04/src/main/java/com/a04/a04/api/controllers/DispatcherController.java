@@ -74,6 +74,23 @@ public class DispatcherController {
         }
     }
 
+    @RequestMapping(value = "/offer", method = RequestMethod.POST)
+    public ResponseEntity<Offer> createOffer(@RequestParam("offeringTaxi") int offeringTaxi, @RequestParam("openSeats") int openSeats, @RequestParam("offerer") String offerer,
+                                             @RequestParam("offererRating") float offererRating, @RequestParam("offerTime") String offerTime, @RequestParam("offerDestination") String offerDestination,
+                                             @RequestParam("startLocation") String startLocation) {
+        OfferDB offerDB = new OfferDB();
+        int offerId = offerDB.getMaxOfferId() + 1;
+        Offer newOffer = new Offer(offerId, offeringTaxi, openSeats, offerer, offererRating, offerTime, offerDestination, startLocation);
+        //boolean success = offerDB.createOffer(newOffer);
+        boolean success = true;
+        offerDB.close();
+        if (success) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(newOffer);
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
+
     @RequestMapping(value = "/error", method = RequestMethod.GET)
     public String error() {
         return "error page";

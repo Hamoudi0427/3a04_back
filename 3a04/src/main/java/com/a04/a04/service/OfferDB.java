@@ -41,6 +41,38 @@ public class OfferDB {
         }
     }
 
+    public boolean createOffer(Offer newOffer) {
+        try {
+            Statement statement = connection.createStatement();
+            String query = "SELECT * FROM offers";
+            ResultSet rs = statement.executeQuery(query);
+            ArrayList<Offer> offers = new ArrayList<Offer>();
+            while (rs.next()) {
+                Offer temp = new Offer(rs.getInt("Offer_ID"), rs.getInt("Offering_taxi"), rs.getInt("Open_seats"),
+                        rs.getString("Offerer"), rs.getFloat("Offerer_rating"), rs.getString("Offer_time"),
+                        rs.getString("Offer_destination"), rs.getString("Start_location"));
+                offers.add(temp);
+            }
+            return true;
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+    }
+
+    public int getMaxOfferId() {
+        try {
+            Statement statement = connection.createStatement();
+            String query = "SELECT MAX(Offer_ID) as Max FROM offers";
+            ResultSet rs = statement.executeQuery(query);
+            rs.next();
+            return rs.getInt("Max");
+        } catch (Exception e) {
+            System.out.println(e);
+            return -1;
+        }
+    }
+
     public void close() {
         try {
             connection.close();
