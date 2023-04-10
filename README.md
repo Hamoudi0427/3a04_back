@@ -24,3 +24,11 @@ GET https://3a04back-production.up.railway.app/offer
 
 Success response: 200 status and JSON containing offer object in response body.
 Failure Resposne: 400 status and empty response.
+
+# Create Carpool Offer
+POST https://3a04back-production.up.railway.app/offer?offeringTaxi=||&openSeats=||&offerer=||&offererRating=||&offerTime=||&offerDestination=helo&startLocation=||
+
+Success response: 201 status and item created in response body as JSON.
+Failure Resposne: 400 status.
+
+Note: offeringTaxi and offerer are foreign keys, so must exists in those tables.
