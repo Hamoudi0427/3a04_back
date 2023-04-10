@@ -56,6 +56,11 @@ public class EncryptionController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Deletion failed.");
         }
     }
+
+    @RequestMapping(value = "/error", method = RequestMethod.GET)
+    public String error() {
+        return "error page";
+    }
 }
 
 // change schema to only have email, first, last, age, password, primary key is email
