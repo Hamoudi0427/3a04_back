@@ -74,6 +74,18 @@ public class DispatcherController {
         }
     }
 
+    @RequestMapping(value = "/offer", method = RequestMethod.GET)
+    public ResponseEntity<ArrayList<Offer>> getOffersByUsername(@RequestParam("username") String username) {
+        OfferDB offerDB = new OfferDB();
+        ArrayList<Offer> offers = offerDB.getOffersByUsername(username);
+        offerDB.close();
+        if (offers != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(offers);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
     @RequestMapping(value = "/offer", method = RequestMethod.POST)
     public ResponseEntity<Offer> createOffer(@RequestParam("offeringTaxi") int offeringTaxi, @RequestParam("openSeats") int openSeats, @RequestParam("offerer") String offerer,
                                              @RequestParam("offererRating") float offererRating, @RequestParam("offerTime") String offerTime, @RequestParam("offerDestination") String offerDestination,

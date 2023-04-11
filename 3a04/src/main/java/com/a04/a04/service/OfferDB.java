@@ -41,6 +41,25 @@ public class OfferDB {
         }
     }
 
+    public ArrayList<Offer> getOffersByUsername(String username) {
+        try {
+            Statement statement = connection.createStatement();
+            String query = "SELECT * FROM offers WHERE Username = " + username;
+            ResultSet rs = statement.executeQuery(query);
+            ArrayList<Offer> offers = new ArrayList<Offer>();
+            while (rs.next()) {
+                Offer temp = new Offer(rs.getInt("Offer_ID"), rs.getInt("Offering_taxi"), rs.getInt("Open_seats"),
+                        rs.getString("Offerer"), rs.getFloat("Offerer_rating"), rs.getString("Offer_time"),
+                        rs.getString("Offer_destination"), rs.getString("Start_location"));
+                offers.add(temp);
+            }
+            return offers;
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
     public boolean createOffer(Offer newOffer) {
         try {
             Statement statement = connection.createStatement();
