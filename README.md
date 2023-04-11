@@ -38,3 +38,9 @@ DELETE https://3a04back-production.up.railway.app/offer?offerId=||
 
 Success response: 204 status if success.
 Failure Resposne: 400 status if failure.
+
+# Get Offers by Username
+GET https://3a04back-production.up.railway.app/offer/<username here>
+  
+Success response: 200 and json array of offers.
+Failure response: 404.
