@@ -44,7 +44,7 @@ public class OfferDB {
     public ArrayList<Offer> getOffersByUsername(String username) {
         try {
             Statement statement = connection.createStatement();
-            String query = "SELECT * FROM offers WHERE Username = '" + username + "'";
+            String query = "SELECT * FROM offers WHERE Offerer = '" + username + "'";
             ResultSet rs = statement.executeQuery(query);
             ArrayList<Offer> offers = new ArrayList<Offer>();
             while (rs.next()) {
