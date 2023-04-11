@@ -74,7 +74,7 @@ public class DispatcherController {
         }
     }
 
-    @RequestMapping(value = "/offer", method = RequestMethod.GET)
+    @RequestMapping(value = "/offer/{username}", method = RequestMethod.GET)
     public ResponseEntity<ArrayList<Offer>> getOffersByUsername(@RequestParam("username") String username) {
         OfferDB offerDB = new OfferDB();
         ArrayList<Offer> offers = offerDB.getOffersByUsername(username);
