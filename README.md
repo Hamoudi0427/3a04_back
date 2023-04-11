@@ -32,3 +32,9 @@ Success response: 201 status and item created in response body as JSON.
 Failure Resposne: 400 status.
 
 Note: offeringTaxi and offerer are foreign keys, so must exists in those tables.
+
+# Delete Carpool Offer
+DELETE https://3a04back-production.up.railway.app/offer?offerId=||
+
+Success response: 204 status if success.
+Failure Resposne: 400 status if failure.
